@@ -25,3 +25,10 @@ jobs:
       - name: Subir imagen a DockerHub
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/postgres-db:16.1
+      
+      - name: Run container for test
+        run: |
+          docker run -d \
+            -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+            -p 5433:5432 \
+            nicolasbncruz/postgres-db:16.1
